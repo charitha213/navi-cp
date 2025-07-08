@@ -1,0 +1,17 @@
+/* src/components/AlternativeList.css */
+.alt-box {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.alt-box.low {
+  background-color: #d4edda;
+  border-color: #28a745;
+}
+
+.alt-box.medium {
+  background-color: #fff3cd;
+  border-color: #ffc107;
+}

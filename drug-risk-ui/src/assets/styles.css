@@ -1,0 +1,114 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+input, select {
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #0053ba;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #003f8c;
+}
+
+.high-risk {
+  color: red;
+  font-weight: bold;
+}
+
+.low-risk {
+  color: green;
+  font-weight: bold;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: #fafafa;
+}
+
+
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+}
+
+.login-card {
+  margin-top: 100px;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-card button:hover {
+  background: #1a252f;
+}
+
+.error {
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+}

@@ -1,0 +1,49 @@
+/* src/pages/LoginPage.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(to right, #dfe9f3, #ffffff);
+  /* padding-right: 10%; */
+}
+
+.login-card {
+  background: white;
+  padding: 2rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  justify-items: center;
+  align-items: center;
+  
+
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-card input,
+.login-card select,
+.login-card button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login-card button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.login-card button:hover {
+  background-color: #0056b3;
+}
