@@ -1,5 +1,3 @@
-// src/data/drugData.js
-
 export const drugList = [
   {
     drugname: "XOLAIR",
@@ -28,12 +26,24 @@ export const drugList = [
   {
     drugname: "CYCLOPHOSPHAMIDE",
     prod_ai: "CYCLOPHOSPHAMIDE",
-    risk_level: "medium",
+    risk_level: "high",
+    flagged: true,
+  },
+  {
+    drugname: "VINCRISTINE low",
+    prod_ai: "VINCRISTINE",
+    risk_level: "low",
     flagged: false,
   },
   {
     drugname: "VINCRISTINE",
     prod_ai: "VINCRISTINE",
+    risk_level: "high",
+    flagged: true,
+  },
+  {
+    drugname: "blah",
+    prod_ai: "CYCLOPHOSPHAMIDE",
     risk_level: "low",
     flagged: false,
   },

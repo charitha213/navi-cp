@@ -1,4 +1,3 @@
-// src/pages/Modal.js
 import React from 'react';
 import './Modal.css';
 

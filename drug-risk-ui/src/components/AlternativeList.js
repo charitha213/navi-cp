@@ -1,8 +1,7 @@
-// src/components/AlternativeList.js
+
 
 import React from "react";
-import "./AlternativeList.css"; // Optional for styling
-
+import "./AlternativeList.css"; 
 export default function AlternativeList({ alternatives }) {
   if (!alternatives || alternatives.length === 0) {
     return <p>No low-risk alternatives found.</p>;

@@ -1,6 +1,9 @@
-// src/pages/ManagerDashboard.js
 import React, { useState } from "react";
-import { getAllFlaggedDrugs } from "./ProductionChecker";
+import {
+  getAllFlaggedDrugs,
+  suppressDrug,
+  unsuppressDrug,
+} from "./ProductionChecker";
 import AlternativeList from "../components/AlternativeList";
 
 export default function ManagerDashboard() {
@@ -8,12 +11,28 @@ export default function ManagerDashboard() {
 
   const handleLoad = () => {
     const flagged = getAllFlaggedDrugs();
-    setFlaggedDrugs(flagged);
+    setFlaggedDrugs([...flagged]); 
+  };
+
+  const handleToggle = (drugname) => {
+    const drug = flaggedDrugs.find((d) => d.drugname === drugname);
+    if (!drug) return;
+
+    if (drug.suppressed) {
+      unsuppressDrug(drugname); 
+      drug.suppressed = false;
+    } else {
+      suppressDrug(drugname); 
+      drug.suppressed = true;
+    }
+
+    setFlaggedDrugs([...flaggedDrugs]); 
   };
 
   return (
     <div className="container">
       <h2>Manager Dashboard</h2>
+      <p>Review flagged high-risk drugs and manage suppression status.</p>
       <button onClick={handleLoad}>Load Flagged Drugs</button>
 
       {flaggedDrugs.length === 0 ? (
@@ -21,11 +40,35 @@ export default function ManagerDashboard() {
       ) : (
         <div>
           {flaggedDrugs.map((drug, index) => (
-            <div key={index} style={{ marginBottom: "20px", borderBottom: "1px solid #ccc" }}>
+            <div
+              key={index}
+              style={{
+                borderBottom: "1px solid #ccc",
+                marginBottom: "20px",
+                paddingBottom: "10px",
+              }}
+            >
               <p>
                 <strong>{drug.drugname}</strong> — Risk Level:{" "}
-                <strong style={{ color: "red" }}>{drug.risk_level.toUpperCase()}</strong>
+                <span style={{ color: "red" }}>
+                  {drug.risk_level.toUpperCase()}
+                </span>
               </p>
+              <p>
+                <strong>Status:</strong>{" "}
+                <span
+                  style={{
+                    color: drug.suppressed ? "orange" : "green",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {drug.suppressed ? "Suppressed" : "Active"}
+                </span>
+              </p>
+              <button onClick={() => handleToggle(drug.drugname)}>
+                {drug.suppressed ? "Un-Suppress" : "Suppress"}
+              </button>
+
               <AlternativeList alternatives={drug.alternatives} />
             </div>
           ))}

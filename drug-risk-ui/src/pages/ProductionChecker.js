@@ -1,4 +1,3 @@
-// src/pages/ProductionChecker.js
 import { useState } from "react";
 import { drugList } from "../data/drugData";
 import "./DrugSearch.css";
@@ -27,6 +26,7 @@ export function checkDrugRisk(drugName) {
     flaggedDrugs.push({
       ...match,
       alternatives,
+      suppressed: false,
     });
   }
 
@@ -40,22 +40,22 @@ export function checkDrugRisk(drugName) {
   };
 }
 
-// 🧠 Logic: Return flagged drugs for manager
-
-// (Optional) Pre-populate for demo
-if (flaggedDrugs.length === 0) {
-  flaggedDrugs.push({
-    drugname: "ASPIRIN",
-    risk_level: "high",
-    prod_ai: "ASPIRIN",
-    pt: "Bleeding",
-    outc_cod: "LT",
-    alternatives: getAlternatives("ASPIRIN"),
-  });
-}
-
 export function getAllFlaggedDrugs() {
   return flaggedDrugs;
+}
+
+export function suppressDrug(drugname) {
+  const drug = flaggedDrugs.find((d) => d.drugname === drugname);
+  if (drug) {
+    drug.suppressed = true;
+  }
+}
+
+export function unsuppressDrug(drugname) {
+  const drug = flaggedDrugs.find((d) => d.drugname === drugname);
+  if (drug) {
+    drug.suppressed = false;
+  }
 }
 
 export default function ProductionChecker() {
