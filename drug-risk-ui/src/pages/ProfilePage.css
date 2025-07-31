@@ -1,0 +1,212 @@
+.profile-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f2f5;
+}
+
+.profile-patient {
+  background-color: #f0e6fa; /* Light purple for patients */
+}
+.profile-manager {
+  background-color: #e6f3e6;
+}
+.profile-doctor {
+  background-color: #e6f0fa;
+}
+.profile-production {
+  background-color: #fcefe2;
+}
+.profile-default {
+  background-color: #f0f2f5;
+}
+
+.profile-card {
+  background: #ffffff;
+  max-width: 400px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  padding-top: 0.1%;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+.profile-header {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a2e44;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #1a2e44;
+  padding-bottom: 10px;
+}
+
+.profile-details {
+  margin-bottom: 20px;
+}
+
+.profile-details p {
+  margin: 12px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.profile-details strong {
+  color: #1a2e44;
+  font-weight: 600;
+}
+
+.profile-reporting {
+  margin-top: 20px;
+  padding: 15px;
+  border-left: 4px solid #1a2e44;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+}
+
+.profile-reporting h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a2e44;
+  margin-bottom: 10px;
+}
+
+.profile-reporting p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.profile-loading {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.profile-error {
+  text-align: center;
+  color: #d32f2f;
+  font-size: 18px;
+  padding: 20px;
+}
+
+/* New styles for edit mode */
+.profile-edit {
+  margin-top: 20px;
+}
+
+.profile-field,
+.address-field {
+  margin-bottom: 15px;
+}
+
+.profile-field label,
+.address-field label {
+  display: block;
+  font-weight: 600;
+  color: #1a2e44;
+  margin-bottom: 5px;
+}
+
+.profile-field input,
+.address-field input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.profile-address {
+  margin-top: 10px;
+}
+
+.profile-address h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a2e44;
+  margin-bottom: 10px;
+}
+
+.profile-save,
+.profile-cancel,
+.profile-edit-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.profile-save {
+  background-color: #1a2e44;
+  color: #fff;
+}
+
+.profile-save:hover {
+  background-color: #132f4c;
+}
+
+.profile-cancel {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.profile-cancel:hover {
+  background-color: #d32f2f;
+}
+
+.profile-edit-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.profile-edit-button:hover {
+  background-color: #45a049;
+}
+
+.profile-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #4caf50;
+}
+
+.profile-message.error {
+  color: #d32f2f;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 15px;
+    max-width: 90%;
+  }
+  .profile-header {
+    font-size: 24px;
+  }
+  .profile-details p,
+  .profile-reporting p,
+  .profile-field input,
+  .address-field input {
+    font-size: 14px;
+  }
+  .profile-reporting h3,
+  .profile-address h3 {
+    font-size: 18px;
+  }
+  .profile-save,
+  .profile-cancel,
+  .profile-edit-button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+}

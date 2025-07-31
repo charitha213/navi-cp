@@ -1,112 +1,143 @@
 .dashboard-container {
   display: flex;
+  min-height: calc(100vh - 70px);
+  background-color: #e8edf3;
+  font-family: "Segoe UI", sans-serif;
   padding: 2rem;
-  background: #f1f3f5;
-  min-height: 100vh;
   gap: 2rem;
+  box-sizing: border-box;
 }
 
+/* LEFT PANEL (Search Panel) */
 .left-panel {
-  flex: 1;
-  background: #e2e2e2;
-  border-radius: 15px;
-  padding: 1rem;
+  width: 35%;
+  background-color: #132133;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
 }
 
 .left-panel input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  margin-bottom: 1rem;
+  padding: 12px;
   font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  margin-bottom: 1.5rem;
+  background-color: #f9f9f9;
+  color: black;
 }
 
 .results-list {
   flex: 1;
   overflow-y: auto;
-  background: white;
+  background-color: #2c3e50;
+  padding: 1rem;
   border-radius: 10px;
-  padding: 0.5rem;
 }
 
 .drug-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px dashed #ccc;
+  padding: 10px 0;
+  border-bottom: 1px solid #445566;
 }
 
 .drug-info {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  font-size: 1rem;
+  color: #ecf0f1;
 }
 
 .risk-dot {
-  height: 12px;
-  width: 12px;
+  height: 10px;
+  width: 10px;
   border-radius: 50%;
   display: inline-block;
 }
 
-.risk-dot.low { background: green; }
-.risk-dot.medium { background: orange; }
-.risk-dot.high { background: red; }
+.risk-dot.low { background-color: #2ecc71; }
+.risk-dot.medium { background-color: #f39c12; }
+.risk-dot.high { background-color: #e74c3c; }
 
+.drug-item button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+/* RIGHT PANEL (Prescription) */
 .right-panel {
   flex: 1;
-  background: white;
-  border-radius: 15px;
-  padding: 1rem;
+  background-color: white;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
 }
 
 .prescription-header {
-  text-align: center;
-  margin-bottom: 1rem;
+  text-align: right;
+  margin-bottom: 1.5rem;
 }
 
 .print-btn {
-  background-color: #007bff;
+  background-color: #3498db;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   padding: 10px 20px;
-  border-radius: 10px;
   border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
   cursor: pointer;
 }
 
 .prescription-body {
-  background: #f7f7f7;
+  background-color: #95bade;
   border-radius: 10px;
-  flex: 1;
   padding: 1rem;
+  flex: 1;
   overflow-y: auto;
-  font-size: 1rem;
+  justify-content: center;
 }
 
 .prescription-line {
-  padding: 10px;
-  border-bottom: 1px dotted #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+  margin-right: 30px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
-.prescription-line input {
-  padding: 8px;
-  border-radius: 8px;
+.prescription-line input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
   border: 1px solid #ccc;
+  border-radius: 8px;
   width: 100%;
 }
 
+/* Toggle switches */
 .toggle-group {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .toggle-wrapper {
@@ -140,11 +171,120 @@
   transition: transform 0.3s ease;
 }
 
-.toggle-wrapper input:checked + .slider::before {
-  transform: translateX(20px);
-  background: #f9f9f9;
+.toggle-wrapper input:checked + .slider {
+  background: #2ecc71;
 }
 
-.toggle-wrapper input:checked + .slider {
-  background: #4caf50;
+.toggle-wrapper input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.plus {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Appointments Tab (Matching Nurse Dashboard) */
+.main-content {
+  flex: 1;
+  padding: 0;
+}
+
+.main-content h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.appointment-card {
+  background-color: white;
+  padding: 15px;
+  border-left: 4px solid #3498db;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appointment-details {
+  flex-grow: 1;
+}
+
+.appointment-details p {
+  margin: 5px 0;
+  color: #34495e;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.forward-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  height: 30px;
+  width: 120px;
+  transition: background-color 0.3s;
+}
+
+.forward-button:hover {
+  background-color: #2980b9;
+}
+
+.no-appointments {
+  color: #7f8c8d;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.date-breakpoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.date-breakpoint hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #bdc3c7;
+  margin-bottom: 5px;
+}
+
+.date-breakpoint span {
+  color: #7f8c8d;
+  font-size: 1rem;
+  background-color: #e8edf3;
+  padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+  }
+  .appointment-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .forward-button {
+    margin-top: 10px;
+    width: 100%;
+  }
 }

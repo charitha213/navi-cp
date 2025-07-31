@@ -1,49 +1,159 @@
 /* src/pages/LoginPage.css */
-.login-container {
+.login-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  background: linear-gradient(to right, #dfe9f3, #ffffff);
-  /* padding-right: 10%; */
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: #ffffff;
+  position: relative;
 }
 
-.login-card {
-  background: white;
-  padding: 2rem 2rem;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  width: 400px;
+.back-to-login {
+  width: 7%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #4a90e2cc;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-login:hover {
+  background-color: #357abd;
+  transform: translateY(-2px);
+}
+
+.back-to-login:active {
+  transform: translateY(0);
+}
+
+.login-left {
+  flex: 1;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 100px;
+  color: #ffffff;
+  background: #ffffff;
+}
+
+.login-title {
+  font-size: 2.5rem;
+  color: #111827;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 400px;
+}
+
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  justify-items: center;
-  align-items: center;
-  
-
+  max-width: 400px;
+  width: 100%;
+  row-gap: 1px;
 }
 
-.login-card h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.login-card input,
-.login-card select,
-.login-card button {
-  padding: 0.75rem;
+.login-form input,
+.login-form select {
+  width: 100%;
+  padding: 0.85rem;
   font-size: 1rem;
-  border-radius: 8px;
   border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f1f5f9;
+  transition: border 0.2s;
+  box-sizing: border-box;
 }
 
-.login-card button {
-  background-color: #007bff;
+.login-form input:focus,
+.login-form select:focus {
+  outline: none;
+  border: 1px solid #3b82f6;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #000;
   color: white;
+  font-size: 1rem;
   border: none;
-  transition: 0.2s ease-in-out;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.login-card button:hover {
-  background-color: #0056b3;
+.login-form button:hover {
+  background-color: #333;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-right {
+  flex: 1;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.login-image {
+  width: 80%;
+  height: 85vh;
+  object-fit:fill;
+  background: #ffffff;
+}
+
+/* New styles for signup section */
+.signup-link-container {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 0.5rem;
+  
+  margin-top: 1.5rem;
+  text-align: center;
+  margin-left: 2px;
+}
+
+.signup-text {
+  margin-left: 5rem;
+  font-size: 1rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.signup-link {
+  font-size: 1rem;
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background-color: #e6f0fa;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.signup-link:hover {
+  background-color: #4a90e2;
+  color: white;
+  text-decoration: none;
 }

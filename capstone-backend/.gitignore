@@ -1,0 +1,19 @@
+# Ignore Python virtual environment
+venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# PyCharm specific
+.idea/
+
+# Environment variables and settings
+.env
+
+# Log files
+*.log

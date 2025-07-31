@@ -1,0 +1,202 @@
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  color: #333333;
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.admin-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.admin-tabs button {
+  background-color: #d4d4d4;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-tabs button.active {
+  background-color: #1e3a8a;
+  color: #ffffff;
+}
+
+.admin-tabs button:hover {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.drug-panels {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.admin-section {
+  flex: 1;
+  min-width: 350px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.admin-section h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #d1d5db;
+  padding-bottom: 6px;
+  color: #333333;
+}
+
+.doctor-sub-tabs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.doctor-sub-tabs button {
+  background-color: #d4d4d4;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.doctor-sub-tabs button.active {
+  background-color: #1e3a8a;
+  color: #ffffff;
+}
+
+.doctor-sub-tabs button:hover {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.doctor-delete-section {
+  margin-top: 20px;
+}
+
+.doctor-delete-section input {
+  display: block;
+  width: 75%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.doctor-delete-section input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="password"],
+input {
+  display: block;
+  width: 75%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 10px 12px;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #3b82f6;
+}
+
+button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #3b82f6;
+}
+
+h5 {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #333333;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+  color: #333333;
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.doctor-submit {
+  grid-column: 1 / -1;
+}

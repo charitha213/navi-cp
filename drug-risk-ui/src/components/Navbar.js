@@ -1,12 +1,13 @@
-// src/components/Navbar.js
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 export default function Navbar({ isLoggedIn, role, onLogout }) {
   return (
     <nav className="navbar">
-      <h1>💊 Drug Risk System</h1>
-      <ul>
+      <div className="navbar-brand">
+        <span className="brand-text">Drug Risk System</span>
+      </div>
+      <ul className="navbar-links">
         {isLoggedIn && role === "doctor" && (
           <li>
             <Link to="/doctor">Doctor Dashboard</Link>
@@ -19,12 +20,28 @@ export default function Navbar({ isLoggedIn, role, onLogout }) {
         )}
         {isLoggedIn && role === "production" && (
           <li>
-            <Link to="/prodcheck">Production Dashboard</Link>
+            <Link to="/production">Production Dashboard</Link>
           </li>
         )}
         {isLoggedIn && role === "manager" && (
           <li>
             <Link to="/manager">Manager Dashboard</Link>
+          </li>
+        )}
+        {isLoggedIn && role === "patient" && (
+          <li>
+            <Link to="/patient">Patient Dashboard</Link>
+          </li>
+        )}
+        {isLoggedIn &&
+          role === "nurse" && ( // Add nurse link
+            <li>
+              <Link to="/nurse">Nurse Dashboard</Link>
+            </li>
+          )}
+        {isLoggedIn && (
+          <li>
+            <Link to="/profile">Profile</Link>
           </li>
         )}
         {!isLoggedIn ? (

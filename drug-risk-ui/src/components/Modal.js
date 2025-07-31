@@ -1,7 +1,13 @@
-import React from 'react';
-import './Modal.css';
+import React from "react";
+import "./Modal.css";
 
-export default function Modal({ drug, alternatives, onSelect, onProceed, onClose }) {
+export default function Modal({
+  drug,
+  alternatives,
+  onSelect,
+  onProceed,
+  onClose,
+}) {
   if (!drug) return null;
 
   return (
@@ -9,29 +15,39 @@ export default function Modal({ drug, alternatives, onSelect, onProceed, onClose
       <div className="modal-box">
         <h2>High-Risk Drug Alert</h2>
         <p>
-          <strong >{drug.name}</strong> is classified as a <span className={`risk-label ${drug.risk}`}>{drug.risk}</span> risk drug.
+          <strong>{drug.name}</strong> is classified as a{" "}
+          <span className={`risk-label ${drug.risk}`}>{drug.risk}</span> risk
+          drug.
         </p>
 
-        {alternatives.length > 0 ? (
+        {alternatives && alternatives.length > 0 ? (
           <>
             <p>Select a safer alternative below:</p>
             <ul className="alt-list">
               {alternatives.map((alt, i) => (
                 <li key={i}>
                   <button className="alt-btn" onClick={() => onSelect(alt)}>
-                    {alt.name} <span className={`risk-dot ${alt.risk}`}></span>
+                    {alt.name}
+                    <span className={`risk-dot ${alt.risk || "low"}`}></span>
                   </button>
                 </li>
               ))}
             </ul>
           </>
         ) : (
-          <p>No low/medium risk alternatives available.</p>
+          <p>
+            No low-risk alternatives available. You can still proceed if
+            necessary.
+          </p>
         )}
 
         <div className="modal-actions">
-          <button className="proceed-btn" onClick={onProceed}>Proceed with {drug.name}</button>
-          <button className="cancel-btn" onClick={onClose}>Cancel</button>
+          <button className="proceed-btn" onClick={onProceed}>
+            Proceed with {drug.name}
+          </button>
+          <button className="cancel-btn" onClick={onClose}>
+            Cancel
+          </button>
         </div>
       </div>
     </div>

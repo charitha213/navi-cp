@@ -30,7 +30,7 @@
 }
 
 .alt-btn {
-  background-color: #f1f1f1;
+  background-color: #007bff;
   border: none;
   padding: 10px 16px;
   border-radius: 8px;
@@ -70,10 +70,12 @@
 }
 
 .proceed-btn {
-  background-color: #007bff;
+  background-color: #2372cc;
   color: white;
+  padding-right: 10%;
 }
 
 .cancel-btn {
   background-color: #ccc;
+  margin-left: 10%;
 }

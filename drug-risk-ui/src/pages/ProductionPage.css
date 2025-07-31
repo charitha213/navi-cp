@@ -1,62 +1,233 @@
-.production-container {
-  padding: 30px;
-  background-color: #f9f9f9;
+.prod-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.production-input {
-  display: flex;
-  gap: 10px;
+.prod-title {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.prod-search-section {
   margin-bottom: 20px;
 }
 
-input[type="text"] {
-  padding: 10px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.prod-search-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
-button {
-  padding: 10px 15px;
-  background-color: #007bff;
+.prod-search-input:focus {
+  outline: none;
+  border-color: #2980b9;
+}
+
+.prod-suggestions {
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.prod-suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.prod-suggestions li:hover {
+  background-color: #ecf0f1;
+}
+
+.prod-risk-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.prod-risk-dot.low { background-color: #27ae60; }
+.prod-risk-dot.high { background-color: #e74c3c; }
+
+.prod-selected-card {
+  margin: 20px 0;
+  padding: 15px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  background-color: #f5f6fa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.prod-selected-card h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.prod-risk {
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: white;
+}
+
+.prod-risk.low { background-color: #27ae60; }
+.prod-risk.high { background-color: #e74c3c; }
+
+.prod-flag-btn {
+  padding: 10px 20px;
+  background-color: #e74c3c;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.prod-flag-btn:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.prod-flag-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.prod-message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.prod-message.success { background-color: #27ae60; color: white; }
+.prod-message.error { background-color: #e74c3c; color: white; }
+
+.prod-flagged-section {
+  margin-top: 30px;
+  padding: 15px;
+  border: 2px solid #297fb954;
+  border-radius: 8px;
+  background-color: #297fb954;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.prod-flagged-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.prod-header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.prod-refresh-btn, .prod-clear-btn, .prod-dismiss-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.prod-refresh-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.prod-clear-btn {
+  background-color: #7f8c8d;
+  color: white;
+}
+
+.prod-dismiss-btn {
+  background-color: #e74c3c;
+  color: white;
+  margin-left: 10px;
+}
+
+.prod-refresh-btn:hover, .prod-clear-btn:hover, .prod-dismiss-btn:hover {
+  opacity: 0.9;
+}
+
+.prod-no-flagged {
+  color: #7f8c8d;
+  text-align: center;
+}
+
+/* New styles for collapsible cards */
+.prod-flagged-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.prod-flagged-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.prod-flagged-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prod-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f6fa;
   cursor: pointer;
 }
 
-.result-box {
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 20px;
-  background-color: #ffffff;
-  border-left: 6px solid gray;
+.prod-card-header h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
 }
 
-.result-box.low {
-  border-left-color: green;
-}
-
-.result-box.high {
-  border-left-color: red;
-}
-
-.risk-tag {
+.prod-status {
   font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.prod-status.suppressed { background-color: orange; color: white; }
+.prod-status.active { background-color: #27ae60; color: white; }
+
+.prod-card-content {
+  padding: 10px;
+  background-color: #fff;
+}
+
+.prod-alternatives {
+  margin-top: 5px;
+  color: #2c3e50;
+  font-style: italic;
+}
+
+/* New style for reviewed label */
+.prod-reviewed-label {
+  margin-left: 10px;
+  padding: 2px 6px;
+  background-color: #3498db;
   color: white;
-}
-
-.risk-tag.low {
-  background-color: green;
-}
-
-.risk-tag.high {
-  background-color: red;
-}
-
-.warning {
-  color: red;
-  font-weight: bold;
+  border-radius: 3px;
+  font-size: 0.9rem;
 }

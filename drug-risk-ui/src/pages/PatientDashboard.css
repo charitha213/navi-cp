@@ -1,0 +1,280 @@
+/* src/components/PatientDashboard.css */
+.patient-dashboard {
+  font-family: "Segoe UI", sans-serif;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  color: #2c3e50;
+}
+
+.patient-dashboard h2 {
+  text-align: center;
+  color: #18447c;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.tab-buttons button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1a73e8;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.tab-buttons button:hover {
+  color: #1557b0;
+}
+
+.tab-buttons button.active {
+  color: #1557b0;
+  border-bottom: 2px solid #1a73e8;
+}
+
+/* Booking Appointment Section */
+.book-appointment {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.book-appointment .form-section {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.book-appointment .past-appointments-section {
+  flex: 1;
+  padding-left: 2rem;
+}
+
+.book-appointment h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.book-appointment form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.book-appointment input[type="datetime-local"] {
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.book-appointment input[type="datetime-local"]:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+.book-appointment button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.book-appointment button:hover {
+  background-color: #1557b0;
+}
+
+.book-appointment p {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Calendar Section */
+.calendar {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.calendar h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.calendar table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.calendar th,
+.calendar td {
+  padding: 0.8rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.calendar th {
+  background-color: #1a73e8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.calendar td {
+  height: 100px;
+  vertical-align: top;
+  position: relative;
+}
+
+.calendar .today {
+  background-color: #e8f0fe;
+  font-weight: 500;
+}
+
+.calendar .appointment {
+  background-color: #f0fff4;
+}
+
+.calendar .appointment-time {
+  font-size: 0.85rem;
+  color: #2ecc71;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+}
+
+.calendar p {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Past Appointments Section */
+.past-appointments {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.past-appointments h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.past-appointment-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9fafb;
+  border-left: 4px solid #1a73e8;
+  border-radius: 5px;
+}
+
+.past-appointment-card:last-child {
+  margin-bottom: 0;
+}
+
+.past-appointment-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #34495e;
+}
+
+.past-appointments p {
+  color: #7f8c8d;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Login Button */
+.patient-dashboard button {
+  padding: 0.9rem 1.8rem;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto;
+  display: block;
+}
+
+.patient-dashboard button:hover {
+  background-color: #1557b0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .patient-dashboard {
+    padding: 1rem;
+  }
+
+  .tab-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .book-appointment {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .book-appointment .form-section {
+    padding-right: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .book-appointment .past-appointments-section {
+    padding-left: 0;
+    margin-top: 1.5rem;
+  }
+
+  .calendar {
+    padding: 1.5rem;
+  }
+
+  .calendar td {
+    height: 80px;
+  }
+}
