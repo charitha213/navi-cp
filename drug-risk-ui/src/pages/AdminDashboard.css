@@ -200,3 +200,25 @@ li {
 .doctor-submit {
   grid-column: 1 / -1;
 }
+
+.drug-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drug-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.drug-form input {
+  padding: 5px;
+  width: 200px;
+}
+
+.drug-form button {
+  width: 200px;
+  padding: 5px;
+  margin-top: 10px;
+}

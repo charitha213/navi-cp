@@ -124,33 +124,87 @@ async def add_user(
 
 @router.post("/add-drug")
 async def add_single_drug(
+    # Basic info
     name: str = Form(...),
-    prod_ai: str = Form(...),
+    prod_ai: str = Form(...),  # Matches Drug model's prod_ai column
     pt: str = Form(""),
     outc_cod: str = Form(""),
+
+    # Numeric features
+    dose_amt: float = Form(0),
+    nda_num: int = Form(0),
+
+    # Categorical features
+    route: str = Form("Unknown"),
+    dose_unit: str = Form("Unknown"),
+    dose_form: str = Form("Unknown"),
+    dose_freq: str = Form("Unknown"),
+    dechal: str = Form("Unknown"),
+    rechal: str = Form("Unknown"),
+    role_cod: str = Form("PS"),
+
     role: str = Depends(get_current_user_role),
     db: Session = Depends(get_db)
 ):
     if role != "admin":
         raise HTTPException(status_code=403, detail="Not authorized to add drugs")
+
+    # Prepare complete feature dictionary with consistent naming
     features = {
-        "name": name,
+        "drugname": name,  # Changed to match what predict_risk_level expects
         "prod_ai": prod_ai,
         "pt": pt,
         "outc_cod": outc_cod,
+        "dose_amt": dose_amt,
+        "nda_num": nda_num,
+        "route": route,
+        "dose_unit": dose_unit,
+        "dose_form": dose_form,
+        "dose_freq": dose_freq,
+        "dechal": dechal,
+        "rechal": rechal,
+        "role_cod": role_cod
     }
-    prediction = predict_risk_level(features, df_clean)
 
-    drug_entry = Drug(
-        name=name,
-        prod_ai=prod_ai,
-        pt=pt,
-        outc_cod=outc_cod,
-        risk_level=prediction
-    )
-    db.add(drug_entry)
-    db.commit()
-    return {"message": "Drug added", "risk_level": prediction}
+    try:
+        prediction = predict_risk_level(features)
+
+        drug_entry = Drug(
+            name=name,
+            prod_ai=prod_ai,
+            pt=pt,
+            outc_cod=outc_cod,
+            risk_level=prediction,
+            dose_amt=dose_amt,
+            nda_num=nda_num,
+            route=route,
+            dose_unit=dose_unit,
+            dose_form=dose_form,
+            dose_freq=dose_freq,
+            dechal=dechal,
+            rechal=rechal,
+            role_cod=role_cod
+        )
+
+        db.add(drug_entry)
+        db.commit()
+        return {
+            "message": "Drug added successfully",
+            "risk_level": prediction,
+            "drug_details": {
+                "name": name,
+                "active_ingredient": prod_ai,
+                "symptoms": pt,
+                "outcome": outc_cod
+            }
+        }
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=400,
+            detail=f"Drug addition failed: {str(e)}"
+        )
 
 @router.post("/bulk-upload")
 async def bulk_upload(file: UploadFile = File(...), role: str = Depends(get_current_user_role), db: Session = Depends(get_db)):
@@ -162,16 +216,44 @@ async def bulk_upload(file: UploadFile = File(...), role: str = Depends(get_curr
 
     try:
         df = pd.read_excel(file_path)
+        # Ensure all expected columns are present, fill missing with defaults
+        expected_columns = ["name", "prod_ai", "pt", "outc_cod", "dose_amt", "nda_num", "route", "dose_unit", "dose_form", "dose_freq", "dechal", "rechal", "role_cod"]
+        for col in expected_columns:
+            if col not in df.columns:
+                df[col] = "Unknown" if col not in ["dose_amt", "nda_num"] else 0
         results = []
         for _, row in df.iterrows():
-            features = row.to_dict()
+            features = {
+                "drugname": row["name"],
+                "prod_ai": row["prod_ai"],
+                "pt": row.get("pt", "Unknown"),
+                "outc_cod": row.get("outc_cod", "Unknown"),
+                "dose_amt": float(row.get("dose_amt", 0)),
+                "nda_num": int(row.get("nda_num", 0)),
+                "route": row.get("route", "Unknown"),
+                "dose_unit": row.get("dose_unit", "Unknown"),
+                "dose_form": row.get("dose_form", "Unknown"),
+                "dose_freq": row.get("dose_freq", "Unknown"),
+                "dechal": row.get("dechal", "Unknown"),
+                "rechal": row.get("rechal", "Unknown"),
+                "role_cod": row.get("role_cod", "PS")
+            }
             risk = predict_risk_level(features, df_clean)
             drug = Drug(
-                name=features["name"],
+                name=features["drugname"],
                 prod_ai=features["prod_ai"],
-                pt=features.get("pt", ""),
-                outc_cod=features.get("outc_cod", ""),
-                risk_level=risk
+                pt=features["pt"],
+                outc_cod=features["outc_cod"],
+                risk_level=risk,
+                dose_amt=features["dose_amt"],
+                nda_num=features["nda_num"],
+                route=features["route"],
+                dose_unit=features["dose_unit"],
+                dose_form=features["dose_form"],
+                dose_freq=features["dose_freq"],
+                dechal=features["dechal"],
+                rechal=features["rechal"],
+                role_cod=features["role_cod"]
             )
             db.add(drug)
             results.append({**features, "risk_level": risk})
@@ -186,10 +268,19 @@ async def download_template(role: str = Depends(get_current_user_role), db: Sess
     if role != "admin":
         raise HTTPException(status_code=403, detail="Not authorized to download template")
     template_data = {
-        "name": [""],
-        "prod_ai": [""],
-        "pt": [""],
-        "outc_cod": [""]
+        "name": [""],  # Required
+        "prod_ai": [""],  # Required
+        "pt": ["Unknown"],  # Optional, default "Unknown"
+        "outc_cod": ["Unknown"],  # Optional, default "Unknown"
+        "dose_amt": [0],  # Optional, default 0
+        "nda_num": [0],  # Optional, default 0
+        "route": ["Unknown"],  # Optional, default "Unknown"
+        "dose_unit": ["Unknown"],  # Optional, default "Unknown"
+        "dose_form": ["Unknown"],  # Optional, default "Unknown"
+        "dose_freq": ["Unknown"],  # Optional, default "Unknown"
+        "dechal": ["Unknown"],  # Optional, default "Unknown"
+        "rechal": ["Unknown"],  # Optional, default "Unknown"
+        "role_cod": ["PS"]  # Optional, default "PS"
     }
     df = pd.DataFrame(template_data)
     file_path = "drug_template.xlsx"

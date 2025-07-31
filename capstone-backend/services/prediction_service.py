@@ -22,15 +22,25 @@ def preprocess_input(data: dict) -> pd.DataFrame:
     # Prepare DataFrame from input dict
     df = pd.DataFrame([data])
 
-    # Derived fields
+    # Handle unseen categorical values
+    for col in categorical_cols:
+        if col in df:
+            # Transform using encoder if column exists
+            if col in encoders:
+                # Get all known classes
+                known_classes = set(encoders[col].classes_)
+                # Replace unseen values with 'Unknown'
+                df[col] = df[col].apply(lambda x: x if x in known_classes else 'Unknown')
+                # Now encode
+                df[col] = encoders[col].transform(df[col].astype(str))
+            else:
+                # If no encoder exists, keep as-is
+                pass
+
+    # Rest of your preprocessing remains the same...
     df['num_symptoms'] = df['pt'].apply(lambda x: len(x.split(',')) if x else 0)
     df['is_primary'] = (df['role_cod'] == 'PS').astype(int)
     df['primary_dose'] = df['is_primary'] * df['dose_amt']
-
-    # Encode categorical columns using saved encoders
-    for col in categorical_cols:
-        if col in df and col in encoders:
-            df[col] = encoders[col].transform(df[col].astype(str))
 
     # TF-IDF vector
     pt_tfidf = tfidf.transform(df['pt']).toarray()
@@ -41,7 +51,8 @@ def preprocess_input(data: dict) -> pd.DataFrame:
     X = df[feature_cols]
 
     # Scale numeric columns
-    X[numeric_cols] = scaler.transform(X[numeric_cols])
+    if len(numeric_cols) > 0:
+        X[numeric_cols] = scaler.transform(X[numeric_cols])
 
     return X
 

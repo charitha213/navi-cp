@@ -12,7 +12,9 @@ class Drug(Base):
     __tablename__ = "drugs"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
-    pt = Column(String)  # symptoms
+    prod_ai = Column(String)  # Active ingredient
+    pt = Column(String)  # Symptoms
+    outc_cod = Column(String)  # Outcome code (new addition)
     dose_amt = Column(Integer)
     nda_num = Column(Integer)
     route = Column(String)

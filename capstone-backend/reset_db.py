@@ -24,19 +24,7 @@
 #     except Exception as e:
 #         print(f"An error occurred: {str(e)}")
 
-# from sqlalchemy.orm import sessionmaker
-# from database.db import engine
-# from database.models import User
-#
-# Session = sessionmaker(bind=engine)
-# session = Session()
-#
-# users = session.query(User).all()
-#
-# for user in users:
-#     # Filter out SQLAlchemy internals
-#     user_data = {k: v for k, v in user.__dict__.items() if not k.startswith('_')}
-#     print(user_data)
+
 #
 # from sqlalchemy.orm import sessionmaker
 # from sqlalchemy.inspection import inspect
@@ -60,4 +48,3 @@
 #             k: v for k, v in record.__dict__.items() if not k.startswith('_')
 #         }
 #         print(record_data)
-

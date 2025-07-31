@@ -10,8 +10,17 @@ export default function AdminDashboard() {
   const [form, setForm] = useState({
     name: "",
     prod_ai: "",
-    pt: "",
-    outc_cod: "",
+    pt: "Unknown",
+    outc_cod: "Unknown",
+    dose_amt: 0,
+    nda_num: 0,
+    route: "Unknown",
+    dose_unit: "Unknown",
+    dose_form: "Unknown",
+    dose_freq: "Unknown",
+    dechal: "Unknown",
+    rechal: "Unknown",
+    role_cod: "PS",
   });
   const [risk, setRisk] = useState("");
   const [file, setFile] = useState(null);
@@ -46,10 +55,16 @@ export default function AdminDashboard() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/admin/admin/token", {
-        username: "admin",
-        password: "adminpass",
-      });
+      const res = await axios.post(
+        "http://localhost:8000/admin/admin/token",
+        {
+          username: "admin",
+          password: "adminpass",
+        },
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        }
+      );
       setToken(res.data.access_token);
       localStorage.setItem("token", res.data.access_token);
       axios.defaults.headers.common[
@@ -57,26 +72,28 @@ export default function AdminDashboard() {
       ] = `Bearer ${res.data.access_token}`;
       alert("Logged in successfully!");
     } catch (error) {
-      alert("Login failed");
+      alert("Login failed: " + (error.response?.data?.detail || error.message));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    Object.keys(form).forEach((key) => formData.append(key, form[key]));
+    const formData = new URLSearchParams();
+    Object.entries(form).forEach(([key, value]) => formData.append(key, value));
     try {
       const res = await axios.post(
         "http://localhost:8000/admin/admin/add-drug",
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }
       );
       setRisk(res.data.risk_level);
       alert(`Drug added with risk level: ${res.data.risk_level}`);
     } catch (error) {
-      alert("Error adding drug");
+      alert(
+        "Error adding drug: " + (error.response?.data?.detail || error.message)
+      );
     }
   };
 
@@ -96,7 +113,10 @@ export default function AdminDashboard() {
       setBulkResult(res.data.data);
       alert("Bulk upload successful!");
     } catch (error) {
-      alert("Error uploading bulk data");
+      alert(
+        "Error uploading bulk data: " +
+          (error.response?.data?.detail || error.message)
+      );
     }
   };
 
@@ -207,31 +227,129 @@ export default function AdminDashboard() {
             <div className="drug-panels">
               <div className="admin-section">
                 <h4>Add Single Drug</h4>
-                <div>
-                  <input
-                    name="name"
-                    placeholder="Drug Name"
-                    value={form.name}
-                    onChange={handleChange}
-                  />
-                  <input
-                    name="prod_ai"
-                    placeholder="Active Ingredient"
-                    value={form.prod_ai}
-                    onChange={handleChange}
-                  />
-                  <input
-                    name="pt"
-                    placeholder="Preferred Term (optional)"
-                    value={form.pt}
-                    onChange={handleChange}
-                  />
-                  <input
-                    name="outc_cod"
-                    placeholder="Outcome Code (optional)"
-                    value={form.outc_cod}
-                    onChange={handleChange}
-                  />
+                <div className="drug-form">
+                  <label>
+                    Drug Name: *
+                    <input
+                      name="name"
+                      placeholder="e.g., Zylorix"
+                      value={form.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Active Ingredient: *
+                    <input
+                      name="prod_ai"
+                      placeholder="e.g., Zylorine"
+                      value={form.prod_ai}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Preferred Term (Symptoms):
+                    <input
+                      name="pt"
+                      placeholder="e.g., dizziness, nausea, muscle_spasms (or leave as Unknown)"
+                      value={form.pt}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Outcome Code:
+                    <input
+                      name="outc_cod"
+                      placeholder="e.g., outc_cod (or leave as Unknown)"
+                      value={form.outc_cod}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Dose Amount:
+                    <input
+                      name="dose_amt"
+                      type="number"
+                      placeholder="e.g., 250 (or leave as 0)"
+                      value={form.dose_amt}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    NDA Number:
+                    <input
+                      name="nda_num"
+                      type="number"
+                      placeholder="e.g., 98765 (or leave as 0)"
+                      value={form.nda_num}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Route:
+                    <input
+                      name="route"
+                      placeholder="e.g., Oral (or leave as Unknown)"
+                      value={form.route}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Dose Unit:
+                    <input
+                      name="dose_unit"
+                      placeholder="e.g., MG (or leave as Unknown)"
+                      value={form.dose_unit}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Dose Form:
+                    <input
+                      name="dose_form"
+                      placeholder="e.g., Capsule (or leave as Unknown)"
+                      value={form.dose_form}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Dose Frequency:
+                    <input
+                      name="dose_freq"
+                      placeholder="e.g., Q12H (or leave as Unknown)"
+                      value={form.dose_freq}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Dechallenge:
+                    <input
+                      name="dechal"
+                      placeholder="e.g., Y (or leave as Unknown)"
+                      value={form.dechal}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Rechallenge:
+                    <input
+                      name="rechal"
+                      placeholder="e.g., N (or leave as Unknown)"
+                      value={form.rechal}
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Role Code:
+                    <input
+                      name="role_cod"
+                      placeholder="e.g., PS (default, leave as is)"
+                      value={form.role_cod}
+                      onChange={handleChange}
+                      disabled
+                    />
+                  </label>
                   <button onClick={handleSubmit}>Predict & Save</button>
                 </div>
                 {risk && (
@@ -239,6 +357,7 @@ export default function AdminDashboard() {
                     Predicted Risk Level: <strong>{risk}</strong>
                   </p>
                 )}
+                {risk === "" && <p>Please submit to see risk prediction.</p>}
               </div>
 
               <div className="admin-section">
