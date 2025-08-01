@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./LoginPage.css";
 import { login, getRole } from "../authService";
-import doctorImage from "../assets/doctor.jpg"; // Add your doctor image here
+import doctorImage from "../assets/doctor.jpg"; 
 
 export default function LoginPage({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -32,7 +32,7 @@ export default function LoginPage({ onLogin }) {
           case "patient":
             redirectPath = "/patient";
             break;
-          case "nurse": // Add nurse case
+          case "nurse": 
             redirectPath = "/nurse";
             break;
           default:

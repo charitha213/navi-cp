@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { generatePrescriptionPDF } from "./pdfUtils";
-import { format, toZonedTime } from "date-fns-tz"; // Updated to use toZonedTime
+import { format, toZonedTime } from "date-fns-tz"; 
 import "./PatientDashboard.css";
 
 export default function PatientDashboard() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [activeTab, setActiveTab] = useState("calendar"); // Default to calendar
+  const [activeTab, setActiveTab] = useState("calendar"); 
   const [appointments, setAppointments] = useState([]);
   const [appointmentDate, setAppointmentDate] = useState("");
   const [message, setMessage] = useState("");
@@ -20,7 +20,7 @@ export default function PatientDashboard() {
 
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/patient/patient/appointments"); // Updated endpoint
+      const res = await axios.get("http://localhost:8000/patient/patient/appointments"); 
       console.log("Fetched appointments:", res.data); // Debug log
       const fetchedAppointments = res.data.appointments || [];
       setAppointments(fetchedAppointments);
@@ -34,9 +34,9 @@ export default function PatientDashboard() {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/patient/patient/token", // Updated endpoint
+        "http://localhost:8000/patient/patient/token", 
         {
-          username: "pat", // Match database username
+          username: "pat", 
           password: "patientpass",
         }
       );
@@ -46,7 +46,7 @@ export default function PatientDashboard() {
         "Authorization"
       ] = `Bearer ${res.data.access_token}`;
       alert("Logged in successfully!");
-      fetchAppointments(); // Fetch appointments after login
+      fetchAppointments(); 
     } catch (error) {
       alert("Login failed");
     }
@@ -59,26 +59,26 @@ export default function PatientDashboard() {
       return;
     }
     try {
-      // Convert to IST using toZonedTime
+      
       const istDate = toZonedTime(new Date(appointmentDate), "Asia/Kolkata");
       const isoDate = format(istDate, "yyyy-MM-dd'T'HH:mm:ssXXX", {
         timeZone: "Asia/Kolkata",
       });
       await axios.post(
-        "http://localhost:8000/patient/patient/book-appointment", // Updated endpoint
+        "http://localhost:8000/patient/patient/book-appointment", 
         {
           appointment_date: isoDate,
         }
       );
       setMessage("Appointment booked successfully");
-      fetchAppointments(); // Refresh appointments after booking
+      fetchAppointments(); 
     } catch (error) {
       setMessage(error.response?.data?.detail || "Booking failed");
     }
   };
 
   const CalendarTab = () => {
-    const today = toZonedTime(new Date(), "Asia/Kolkata"); // Use IST for today
+    const today = toZonedTime(new Date(), "Asia/Kolkata"); 
     const currentMonth = today.getMonth();
     const currentYear = today.getFullYear();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();

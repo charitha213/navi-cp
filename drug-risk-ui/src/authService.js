@@ -5,7 +5,7 @@ const API_URL = "http://127.0.0.1:8000";
 export const login = async (username, password) => {
   try {
     const response = await axios.post(
-      `${API_URL}/admin/admin/token`, // Use common endpoint
+      `${API_URL}/admin/admin/token`, 
       new URLSearchParams({
         username,
         password,
@@ -16,7 +16,7 @@ export const login = async (username, password) => {
     );
     const { access_token } = response.data;
     localStorage.setItem("token", access_token);
-    localStorage.setItem("username", username); // Store username for role inference
+    localStorage.setItem("username", username); 
     axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
     return true;
   } catch (error) {
@@ -42,11 +42,10 @@ export const getRole = () => {
   const token = localStorage.getItem("token");
   if (token) {
     try {
-      const payload = JSON.parse(atob(token.split(".")[1])); // Decode base64 payload
-      return payload.role || null; // Extract role from JWT
+      const payload = JSON.parse(atob(token.split(".")[1])); 
+      return payload.role || null; 
     } catch (e) {
       console.error("Invalid token format:", e);
-      // Fallback to username-based role inference if JWT decoding fails
       const username = localStorage.getItem("username");
       if (username === "nurse") return "nurse";
       if (username === "pat") return "patient";

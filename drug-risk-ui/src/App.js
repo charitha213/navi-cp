@@ -16,8 +16,8 @@ import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
 import PatientDashboard from "./pages/PatientDashboard";
 import PatientSignUp from "./pages/PatientSignUp";
-import NurseDashboard from "./pages/NurseDashboard"; // Import NurseDashboard
-import { isAuthenticated, getRole, logout } from "./authService"; // Ensure auth utilities are imported
+import NurseDashboard from "./pages/NurseDashboard"; 
+import { isAuthenticated, getRole, logout } from "./authService"; 
 
 function AppWrapper({ user, setUser }) {
   const navigate = useNavigate();
@@ -26,7 +26,6 @@ function AppWrapper({ user, setUser }) {
     location.pathname === "/" || location.pathname === "/login";
 
   useEffect(() => {
-    // Check authentication state and role on mount or user change
     if (isAuthenticated()) {
       const role = getRole();
       if (role) {
@@ -37,18 +36,16 @@ function AppWrapper({ user, setUser }) {
           "/manager",
           "/profile",
           "/patient",
-          "/nurse", // Add nurse route
+          "/nurse", 
         ];
-        const path = `/${role}`; // Default to role-based path
+        const path = `/${role}`; 
         if (!validPaths.includes(location.pathname)) {
-          navigate(path); // Redirect to role-based path if on invalid route
+          navigate(path); 
         }
       } else {
-        // If role is null but authenticated, redirect to login or unauthorized
         navigate("/unauthorized");
       }
     } else if (!isLoginPage && location.pathname !== "/patient/signup") {
-      // If not authenticated and not on login or signup page, redirect to login
       navigate("/login");
     }
   }, [user, navigate, location.pathname]);
@@ -60,8 +57,8 @@ function AppWrapper({ user, setUser }) {
           isLoggedIn={isAuthenticated()}
           role={getRole()}
           onLogout={() => {
-            logout(); // Clear token and headers
-            setUser(null); // Clear user state
+            logout(); 
+            setUser(null); 
             navigate("/login");
           }}
         />
@@ -95,7 +92,6 @@ function AppWrapper({ user, setUser }) {
         <Route path="/patient" element={<PatientDashboard />} />
         <Route path="/patient/signup" element={<PatientSignUp />} />
         <Route path="/nurse" element={<NurseDashboard />} />{" "}
-        {/* Add NurseDashboard route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
@@ -106,7 +102,6 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Initialize user state based on existing token on app load
     if (isAuthenticated()) {
       setUser({ role: getRole() });
     }

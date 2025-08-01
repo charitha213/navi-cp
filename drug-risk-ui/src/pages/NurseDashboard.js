@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { login } from "../authService"; // Ensure path is correct
+import { login } from "../authService";
 import "./NurseDashboard.css";
 
 export default function NurseDashboard() {
@@ -20,11 +20,10 @@ export default function NurseDashboard() {
       const res = await axios.get(
         "http://localhost:8000/nurse/nurse/appointments"
       );
-      // Filter out forwarded appointments (assuming doctor_id is null or undefined for unforwarded)
       const unforwardedAppointments = res.data.filter(
         (app) => !app.doctor_id || app.doctor_id === null
       );
-      // Sort by appointment_date
+
       const sortedAppointments = unforwardedAppointments.sort((a, b) => {
         return new Date(a.appointment_date) - new Date(b.appointment_date);
       });
@@ -50,12 +49,12 @@ export default function NurseDashboard() {
 
   const handleForwardToDoctor = async (patient_username, appointmentDate) => {
     const now = new Date();
-    now.setHours(now.getHours() + 5); // Adjust to IST (UTC+5:30)
-    now.setMinutes(now.getMinutes() + 30); // Adjust to IST (UTC+5:30)
+    now.setHours(now.getHours() + 5);
+    now.setMinutes(now.getMinutes() + 30);
     const appointmentTime = new Date(appointmentDate);
-    const timeDiff = Math.abs(now - appointmentTime) / (1000 * 60); // Difference in minutes
+    const timeDiff = Math.abs(now - appointmentTime) / (1000 * 60);
     const isSameDay = now.toDateString() === appointmentTime.toDateString();
-    const slackMinutes = 30; // ±30 minutes slack
+    const slackMinutes = 30;
 
     if (!isSameDay) {
       setMessage("Cannot forward: Appointment is for a future day.");
@@ -79,7 +78,7 @@ export default function NurseDashboard() {
         `http://localhost:8000/nurse/nurse/forward-to-doctor/${patient_username}`
       );
       setMessage(`Patient ${patient_username} forwarded to doctor`);
-      fetchAppointments(); // Refresh to exclude forwarded appointment
+      fetchAppointments();
     } catch (error) {
       setMessage(error.response?.data?.detail || "Forwarding failed");
     }

@@ -34,7 +34,7 @@ export default function Navbar({ isLoggedIn, role, onLogout }) {
           </li>
         )}
         {isLoggedIn &&
-          role === "nurse" && ( // Add nurse link
+          role === "nurse" && ( 
             <li>
               <Link to="/nurse">Nurse Dashboard</Link>
             </li>

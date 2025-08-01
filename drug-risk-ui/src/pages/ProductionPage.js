@@ -65,7 +65,7 @@ export default function ProductionPage() {
   const handleLoadFlaggedDrugs = async () => {
     try {
       const drugs = await getAllFlaggedDrugs();
-      setFlaggedDrugs(drugs.map((drug) => ({ ...drug, isOpen: false }))); // Initialize with isOpen: false
+      setFlaggedDrugs(drugs.map((drug) => ({ ...drug, isOpen: false })));
     } catch (err) {
       console.error("Error loading flagged drugs:", err);
       setFlaggedDrugs([]);
